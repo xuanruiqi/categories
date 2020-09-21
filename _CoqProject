@@ -1,0 +1,11 @@
+-arg -w -arg -notation-overridden
+-arg -w -arg -ambiguous-paths
+-arg -w -arg -notation-incompatible-format
+
+classical.v
+category.v
+functor.v
+natural.v
+category_instances.v
+
+-R . mathcomp.category
