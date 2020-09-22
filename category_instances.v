@@ -1,10 +1,7 @@
 From mathcomp Require Import all_ssreflect all_algebra.
 Require Import classical category functor natural.
 
-Declare Scope category_scope.
-Delimit Scope category_scope with category.
-
-Local Open Scope category_scope.
+Open Scope category_scope.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -28,5 +25,12 @@ End category_category.
 Section functor_category.
   Variables (C D : category).
 
-  Check (@CatMixin (C ~~> D) (fun F G => F ==> G) (fun F G H N M => M \VO N)). 
+  Definition functor_Category := Eval hnf in @CatMixin (C ~~> D)
+                                                       (fun F G => F ==> G)
+                                                       (fun F G H N M => M \VO N)
+                                                       (@vcomp_assoc C D)
+                                                       (fun F => @IdNT _ _ F)
+                                                       (@vcomp_id_left C D)
+                                                       (@vcomp_id_right C D).
+  Canonical functor_Category.
 End functor_category.

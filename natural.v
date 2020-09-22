@@ -77,7 +77,7 @@ Section id_nt.
   Definition IdNT : F ==> F := Eval hnf in NT IdNT_NTMixin.
   Canonical IdNT.
 End id_nt.
-Arguments IdNT {C D} F.
+Arguments IdNT {C D F}.
 
 Section vertical_composition.
   Variables (C D : category) (F G H : C ~~> D) (N : F ==> G) (M : G ==> H).
@@ -107,7 +107,19 @@ Section vcomp_lemmas.
   Lemma vcomp_assoc (N : F ==> G) (M : G ==> H) (Z : H ==> K) : Z \VO M \VO N = Z \VO (M \VO N).
   Proof.
     apply natural_extensional => //= X.
-    by rewrite /compose_component //= /compose_component comp_assoc.
+    by rewrite /compose_component /compose_component comp_assoc.
+  Qed.
+
+  Lemma vcomp_id_left (N : F ==> G) : N \VO IdNT = N.
+  Proof.
+    apply natural_extensional => //= X.
+    by rewrite /compose_component /id_component comp_id_left.
+  Qed.
+
+  Lemma vcomp_id_right (N : F ==> G) : IdNT \VO N = N.
+  Proof.
+    apply natural_extensional => //= X.
+    by rewrite /compose_component /id_component comp_id_right.
   Qed.
 End vcomp_lemmas.
 

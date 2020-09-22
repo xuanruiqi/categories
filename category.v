@@ -69,7 +69,7 @@ Section category_lemmas.
   
   Lemma comp_assoc (X Y Z W : C) (f : X ~> Y) (g : Y ~> Z) (h : Z ~> W) :
     h \\o g \\o f = h \\o (g \\o f).
-  Proof. by case: C X Y Z W f g h => [? []]. Qed.
+  Proof. by case: C X Y Z W f g h => [? []]. Qed.    
 End category_lemmas.
 
 Section opposite.
