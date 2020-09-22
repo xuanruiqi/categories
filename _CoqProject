@@ -8,4 +8,4 @@ functor.v
 natural.v
 category_instances.v
 
--R . mathcomp.category
+-R . categories
