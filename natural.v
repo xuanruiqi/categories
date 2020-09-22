@@ -50,6 +50,18 @@ Section naturality.
   Proof. by case: N => [? []]. Qed.
 End naturality.
 
+Section naturality_lemmas.
+  Variables (C D : category) (F G : C ~~> D).
+
+  Lemma natural_extensional (N M : F ==> G) : N = M <-> forall X, (N X = M X :> (_ ~> _)).
+  Proof.
+    split => [-> //= |].
+    move: N M => [cn [nat_n]] [cm [nat_m]] //= nm_eq1. move: nat_m nat_n.
+    move: (functional_extensionality_dep cn cm nm_eq1) => -> nat_m nat_n.
+    by move: (Prop_irrelevance nat_m nat_n) => ->.
+  Qed.
+End naturality_lemmas.
+  
 Section id_nt.
   Variables (C D : category) (F : C ~~> D).
 
@@ -93,7 +105,10 @@ Section vcomp_lemmas.
   Variables (C D : category) (F G H K : C ~~> D).
 
   Lemma vcomp_assoc (N : F ==> G) (M : G ==> H) (Z : H ==> K) : Z \VO M \VO N = Z \VO (M \VO N).
-  Admitted.
+  Proof.
+    apply natural_extensional => //= X.
+    by rewrite /compose_component //= /compose_component comp_assoc.
+  Qed.
 End vcomp_lemmas.
 
 Export NaturalTransformation.Exports.

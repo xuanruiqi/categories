@@ -7,3 +7,5 @@ Lemma funext (A B : Type) (f g : A -> B) : f =1 g -> f = g.
 Proof.
   move=> H. extensionality x. apply: H.
 Qed.
+
+Export classical_sets boolp FunctionalExtensionality ProofIrrelevance ProofIrrelevanceFacts.
