@@ -1,11 +1,13 @@
 -arg -w -arg -notation-overridden
 -arg -w -arg -ambiguous-paths
 -arg -w -arg -notation-incompatible-format
+-arg -w -arg -projection-no-head-constant
 
 classical.v
 category.v
 functor.v
 natural.v
+isomorphism.v
 category_instances.v
 
 -R . categories
