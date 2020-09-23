@@ -1,0 +1,37 @@
+opam-version: "2.0"
+synopsis: "Category theory using SSReflect & packed classes" # One-line description
+description: """
+  (Classical) category theory formalized using SSReflect and packaed classes.
+""" # Longer description, can span several lines
+
+homepage: "https://github.com/xuanruiqi/categories"
+dev-repo: "git+https://github.com/xuanruiqi/categoriesgit"
+bug-reports: "https://github.com/xuanruiqi/categories/issues"
+maintainer: "me@xuanruiqi.com"
+authors: [
+  "Xuanrui Qi"
+]
+license: "MIT" # Make sure this is reflected by a LICENSE file in your sources
+
+depends: [
+  "coq" {>= "8.11" & < "8.13~"}
+]
+
+build: [
+  [make "-j%{jobs}%"]
+]
+install: [
+  [make "install"]
+]
+
+url {
+  src: "https://github.com/$YOU/foo/archive/1.0.0.tar.gz"
+  checksum: "sha256=133f2c6de1b9b35c0b26ab3e21fa86a351fffb415d20cae714b015f95fbc3725"
+}
+
+tags: [
+  "keyword:category"
+  "keyword:ssreflect"
+  "category:Math/Category Theory"
+  "logpath:categories"
+]
