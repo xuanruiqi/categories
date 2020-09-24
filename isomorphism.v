@@ -53,3 +53,5 @@ Section iso_lemmas.
     by rewrite comp_assoc -[X in _ \\o X]comp_assoc ?g_inv_l ?f_inv_r comp_id_right.
   Qed.
 End iso_lemmas.
+
+Export Isomorphism.Exports.

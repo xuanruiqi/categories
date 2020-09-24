@@ -10,6 +10,7 @@ Unset Printing Implicit Defensive.
 
 Reserved Infix "==>" (at level 55, right associativity).
 Reserved Infix "\VO" (at level 40, left associativity).
+Reserved Notation "[ C ; D ]" (at level 49).
 
 Module NaturalTransformation.
   Section ClassDef.
@@ -122,5 +123,21 @@ Section vcomp_lemmas.
     by rewrite /compose_component /id_component comp_id_right.
   Qed.
 End vcomp_lemmas.
+
+Section functor_category.
+  Variables (C D : category).
+
+  Definition functor_Category_mixin :=
+    @CatMixin (C ~~> D)
+              (fun F G => F ==> G)
+              (fun F G H N M => M \VO N)
+              (@vcomp_assoc C D)
+              (fun F => @IdNT _ _ F)
+              (@vcomp_id_left C D)
+              (@vcomp_id_right C D).
+  Definition functor_Category := Eval hnf in Category _ functor_Category_mixin.
+  Canonical functor_Category.
+End functor_category.
+Notation "[ C ; D ]" := (functor_Category C D).
 
 Export NaturalTransformation.Exports.

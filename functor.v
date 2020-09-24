@@ -1,6 +1,6 @@
 From mathcomp Require Import all_ssreflect all_algebra.
 From mathcomp.analysis Require Import boolp.
-Require Import category classical.
+Require Import category funlib classical.
 
 Local Open Scope category_scope.
 
@@ -114,5 +114,20 @@ Section composition_laws.
     move: F => [f [???]] //=; functor_cstr.
   Qed.
 End composition_laws.
+
+Section category_category.
+  Definition category_Category := Eval hnf in Category category (@CatMixin category (fun C D => C ~~> D) fcomp fcomp_assoc (fun C => @Id C) fcomp_id_left fcomp_id_right).
+  Canonical category_Category.
+End category_category.
+Notation Cat := category_Category.
+
+(* Full and faithful functors *)
+Section full_faithful.
+  Variables (C D : category).
+  
+  Definition full (F : C ~~> D) := forall X Y : C, injective (@FMap _ _ F X Y).
+  Definition faithful (F : C ~~> D) := forall X Y : C, surjective (@FMap _ _ F X Y).
+  Definition fully_faithful F := full F /\ faithful F.
+End full_faithful.
 
 Export Functor.Exports.

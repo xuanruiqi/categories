@@ -1,4 +1,5 @@
 opam-version: "2.0"
+name: "coq-ssrcategories"
 synopsis: "Category theory using SSReflect & packed classes" # One-line description
 description: """
   (Classical) category theory formalized using SSReflect and packaed classes.
@@ -18,6 +19,7 @@ depends: [
 ]
 
 build: [
+  ["coq_makefile" "-f" "_CoqProject" "-o" "Makefile"]
   [make "-j%{jobs}%"]
 ]
 install: [

@@ -72,6 +72,17 @@ Section category_lemmas.
   Proof. by case: C X Y Z W f g h => [? []]. Qed.    
 End category_lemmas.
 
+Section type.
+  Definition type_CatMixin := @CatMixin Type (fun S T => S -> T) (fun _ _ _ f g => g \o f)
+                                        (ltac: (by []))
+                                        (fun T => @idfun T)
+                                        (ltac: (by []))
+                                        (ltac: (by [])).
+  Definition type_Category := Eval hnf in Category Type type_CatMixin.
+  Canonical type_Category.
+End type.
+Notation TYPE := type_Category.
+
 Section opposite.
   Variable (C : category).
   
@@ -87,7 +98,6 @@ Section opposite.
   Definition opp := Eval hnf in Category C opp_CatMixin.
   Canonical opp.
 End opposite.
-
 Notation "C '^op' " := (opp C) : category_scope.
 
 (* A category with products *)
