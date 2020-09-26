@@ -4,10 +4,10 @@
 -arg -w -arg -projection-no-head-constant
 
 classical.v
+funlib.v
 category.v
 functor.v
 natural.v
 isomorphism.v
-category_instances.v
 
 -R . categories
