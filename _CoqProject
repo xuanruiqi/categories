@@ -9,5 +9,8 @@ category.v
 functor.v
 natural.v
 isomorphism.v
+algebraic.v
+product.v
+equivalence.v
 
 -R . categories

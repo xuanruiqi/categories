@@ -100,46 +100,4 @@ Section opposite.
 End opposite.
 Notation "C '^op' " := (opp C) : category_scope.
 
-(* A category with products *)
-Module ProdCategory.
-  Structure mixin_of (CC : category) : Type := Mixin {
-    prod : CC -> CC -> CC ;
-    proj1 : forall {X1 X2 : CC}, prod X1 X2 ~> X1 ;
-    proj2 : forall {X1 X2 : CC}, prod X1 X2 ~> X2 ;
-    (* the universal property of products *)
-    _ : forall (X1 X2 Y : CC) (f1 : Y ~> X1) (f2 : Y ~> X2),
-        exists! (f : Y ~> prod X1 X2), proj1 \\o f = f1 /\ proj2 \\o f = f2
-  }.
-
-  Section ClassDef.    
-    Record class_of (obj : Type) : Type := Class {
-      base : Category.class_of obj ;
-      mixin : mixin_of (Category.Pack base)
-    }.
-
-    Record type : Type := Pack { obj ; class : class_of obj }.
-    Definition category (CC : type) := Category.Pack (base (class CC)).
-  End ClassDef.
-
-  Module Exports.    
-    (* Definition Prod (CC : type) : CC -> CC -> CC :=
-      let: Pack _ (Class _ (Mixin prod _ _ _)) := CC in prod. *)
-    Coercion base : class_of >-> Category.class_of.
-    Coercion mixin : class_of >-> mixin_of.
-    Coercion obj : type >-> Sortclass.    
-    Coercion category : type >-> Category.type.
-    Canonical category.
-
-    Notation prodCategory := type.
-    Notation ProdCatMixin := Mixin.
-    Notation ProdCategory T m := (@Pack T (@Class _ _ m)).
-    
-    Definition Prod (CC : type) : CC -> CC -> CC :=
-      let: Pack _ (Class _ (Mixin prod _ _ _)) := CC in prod.
-
-    Notation "A * B" := (Prod A B) : category_scope.
-  End Exports.
-End ProdCategory.
-
 Export Category.Exports.
-Export ProdCategory.Exports.
